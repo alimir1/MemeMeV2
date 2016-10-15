@@ -1,0 +1,53 @@
+//
+//  SentMemesCollectionViewController.swift
+//  MemeMe 2.0
+//
+//  Created by Ali Mir on 10/11/16.
+//  Copyright © 2016 com.AliMir. All rights reserved.
+//
+
+import UIKit
+
+final class SentMemesCollectionViewController: UICollectionViewController {
+    fileprivate let reuseIdentifier = "sentMemeCell"
+    fileprivate var memes: [Meme] {
+        // Do any additional setup after loading the view.
+        return (UIApplication.shared.delegate as! AppDelegate).memes
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
+     }
+    
+    func reloadTableData(_ notification: Notification) {
+        collectionView?.reloadData()
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    // MARK: UICollectionViewDataSource
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return memes.count
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SentMemeCell
+        let meme = memes[indexPath.row]
+        
+        cell.imageView.image = meme.originalImage
+        cell.setText(topText: meme.topText, bottomText: meme.bottomText)
+        
+        return cell
+    }
+
+}

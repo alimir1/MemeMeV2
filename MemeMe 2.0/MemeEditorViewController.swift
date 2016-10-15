@@ -26,7 +26,6 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
     override func viewDidLoad() {
         super.viewDidLoad()
         shareButton.isEnabled = false
-        cancelButton.isEnabled = false
         configureMemeUI()
     }
     
@@ -45,11 +44,14 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
         // create the meme
         memedImage = generateMemedImage()
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+        // add the meme to App delegate's meme instance
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
         
+        // reload data in collection view controller
+        NotificationCenter.default.post(name: .reload, object: nil)
     }
     
     func generateMemedImage() -> UIImage {
-        
         // Hide toolbar and navbar
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.setToolbarHidden(true, animated: false)
@@ -183,8 +185,9 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
     
     @IBAction func cancel() {
         configureMemeUI()
-        cancelButton.isEnabled = false
+//        cancelButton.isEnabled = false
         shareButton.isEnabled = false
+        self.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -192,12 +195,16 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePickerView.image = image
             shareButton.isEnabled = true
-            cancelButton.isEnabled = true
+//            cancelButton.isEnabled = true
         }
+        dismiss(animated: true, completion: nil)
     }
+}
+
+extension Notification.Name {
+    static let reload = Notification.Name("reload")
 }
 
