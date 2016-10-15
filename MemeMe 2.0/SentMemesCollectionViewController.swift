@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SentMemesCollectionViewController: UICollectionViewController {
+final class SentMemesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
@@ -20,14 +20,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let space: CGFloat = 3.0
-        let dimension = (self.view.frame.size.width - (2 * space)) / 3.0
-        
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
         
      }
@@ -62,5 +55,21 @@ final class SentMemesCollectionViewController: UICollectionViewController {
         let memeDetailController = self.storyboard!.instantiateViewController(withIdentifier: "memeDetailVC") as! MemeDetailViewController
         memeDetailController.meme = memes[indexPath.row]
         self.navigationController?.pushViewController(memeDetailController, animated: true)
+    }
+    
+    // MARK: Layout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let space: CGFloat = 3.0
+        let size = self.view.frame.size
+        let dimension: CGFloat =  size.width >= size.height ? (size.width - (5 * space)) / 6.0 : (size.width - (2 * space)) / 3.0
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        
+        return CGSize(width: dimension, height: dimension)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        flowLayout.invalidateLayout()
     }
 }
