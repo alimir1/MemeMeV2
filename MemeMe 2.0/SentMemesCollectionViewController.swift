@@ -10,6 +10,8 @@ import UIKit
 
 final class SentMemesCollectionViewController: UICollectionViewController {
         
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
     fileprivate let reuseIdentifier = "sentMemeCell"
     fileprivate var memes: [Meme] {
         // Do any additional setup after loading the view.
@@ -18,6 +20,13 @@ final class SentMemesCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let space: CGFloat = 3.0
+        let dimension = (self.view.frame.size.width - (2 * space)) / 3.0
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
         
