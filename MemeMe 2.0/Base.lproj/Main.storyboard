@@ -120,9 +120,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="XnZ-ad-5cd" kind="show" id="w9D-9y-WRl"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sD-jJ-HZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -193,9 +190,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="XnZ-ad-5cd" kind="show" id="m7P-UL-z2w"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQW-bo-K9J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -204,7 +198,7 @@
         <!--Meme Detail View Controller-->
         <scene sceneID="jem-iT-RLm">
             <objects>
-                <viewController id="XnZ-ad-5cd" customClass="MemeDetailViewController" customModule="MemeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="memeDetailVC" id="XnZ-ad-5cd" customClass="MemeDetailViewController" customModule="MemeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i9w-Gh-lhY"/>
                         <viewControllerLayoutGuide type="bottom" id="5c8-Vg-e8b"/>
@@ -229,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zif-R5-07g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2308" y="590.55472263868069"/>
+            <point key="canvasLocation" x="1658" y="428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kHV-Jf-k0B">
@@ -315,7 +309,6 @@
         <image name="navigationViewTabIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8Fn-l9-oGk"/>
-        <segue reference="w9D-9y-WRl"/>
+        <segue reference="Q3m-np-gb0"/>
     </inferredMetricsTieBreakers>
 </document>

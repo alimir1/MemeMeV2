@@ -178,6 +178,7 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
             (activity: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if completed {
                 self.saveMeme()
+                self.dismiss(animated: true, completion: nil)
             }
         }
         present(activityController, animated: true, completion: nil)
@@ -185,7 +186,6 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
     
     @IBAction func cancel() {
         configureMemeUI()
-//        cancelButton.isEnabled = false
         shareButton.isEnabled = false
         self.dismiss(animated: true, completion: nil)
     }
@@ -198,7 +198,6 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePickerView.image = image
             shareButton.isEnabled = true
-//            cancelButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
     }

@@ -9,6 +9,7 @@
 import UIKit
 
 final class SentMemesCollectionViewController: UICollectionViewController {
+        
     fileprivate let reuseIdentifier = "sentMemeCell"
     fileprivate var memes: [Meme] {
         // Do any additional setup after loading the view.
@@ -17,16 +18,13 @@ final class SentMemesCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
+        
      }
     
     func reloadTableData(_ notification: Notification) {
         collectionView?.reloadData()
-    }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     // MARK: UICollectionViewDataSource
@@ -34,7 +32,6 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
@@ -49,5 +46,12 @@ final class SentMemesCollectionViewController: UICollectionViewController {
         
         return cell
     }
-
+    
+    // MARK: Navigation
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let memeDetailController = self.storyboard!.instantiateViewController(withIdentifier: "memeDetailVC") as! MemeDetailViewController
+        memeDetailController.meme = memes[indexPath.row]
+        self.navigationController?.pushViewController(memeDetailController, animated: true)
+    }
 }
