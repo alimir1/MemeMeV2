@@ -12,17 +12,15 @@ final class SentMemesCollectionViewController: UICollectionViewController, UICol
         
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    fileprivate let reuseIdentifier = "sentMemeCell"
-    fileprivate var memes: [Meme] {
+    let reuseIdentifier = "sentMemeCell"
+    var memes: [Meme] {
         // Do any additional setup after loading the view.
         return (UIApplication.shared.delegate as! AppDelegate).memes
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
-        
      }
     
     func reloadTableData(_ notification: Notification) {
