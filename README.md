@@ -9,7 +9,7 @@
 * iOS: 10.0
 * Swift: 3.0
 
-By: [Ali Mir](http://techrapport.com/Meme-Me)
+By: [Ali Mir](http://alimir.io)
 
 GitHub: https://github.com/alimir1/MemeMeV2
 
