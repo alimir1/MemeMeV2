@@ -25,7 +25,7 @@ I created this app for a [course](https://www.udacity.com/course/uikit-fundament
 * View saved Memes in a grid or a list.
 * View a saved Meme
 
-## Technologies and best practices:
+## Technologies and best practices used:
 
 Some important and notable technologies and best practices I used:
 
